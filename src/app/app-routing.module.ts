@@ -10,6 +10,18 @@ const routes: Routes = [
   {
     path: 'hobby',
     loadChildren: () => import('./components/hobby/hobby.module').then(m => m.HobbyModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./components/registration/registration.module').then(m => m.RegistrationModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule)
   }
 ];
 

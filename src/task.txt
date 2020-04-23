@@ -19,7 +19,7 @@ If user is not registered then he should get appropriate error message
 If a user clicks on the Register button he should be moved to the registration page where he needs to fill the firstname lastname username and password for registration.
 On UserDashboard User can also View all the registered users list
 If Admin want to delete the user admin can delete the user.
- 
+                                 
 [Areas that is covered in this question: ,Interpolation binding,Routing and Navigation ]
 
 
