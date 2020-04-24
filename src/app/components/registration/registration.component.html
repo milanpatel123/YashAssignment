@@ -18,21 +18,34 @@
                             <div class="form-group">
                                 <label for="firstname ">Firstname </label>
                                 <input class="form-control" type="email" id="firstname " required="" placeholder="Enter Firstname" formControlName="fname">
+                                <div *ngIf="fname.invalid && (fname.dirty || fname.touched)">
+                                    <span *ngIf="fname.errors.required" class="text-danger"> Firstname is required.</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="lastname ">Lastname </label>
                                 <input class="form-control" type="email" id="lastname " required="" placeholder="Enter Lastname" formControlName="lname">
+                                <div *ngIf="lname.invalid && (lname.dirty || lname.touched)">
+                                    <span *ngIf="lname.errors.required" class="text-danger"> Lastname is required.</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input class="form-control" type="email" id="username" required="" placeholder="Enter Username" formControlName="username">
+                                <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                                    <span *ngIf="username.errors.required" class="text-danger"> Username is required.</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input class="form-control" type="password" required="" id="password" placeholder="Enter your password" formControlName="password">
+                                <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                    <span *ngIf="password.errors.required" class="text-danger"> Password is required.</span>
+                                    <span *ngIf="password.errors.minlength" class="text-danger"> Password must be at least 6 characters.</span>
+                                </div>
                             </div>
 
                             <!-- <div class="form-group mb-3">
@@ -41,7 +54,7 @@
                                     <label class="custom-control-label" for="checkbox-signin">Remember me</label>
                                 </div>
                             </div> -->
-                            <p class="alert alert-danger    " *ngIf="errMsg">{{errMsg}}</p>
+                            <p class="alert alert-danger" *ngIf="errMsg">{{errMsg}}</p>
                             <div class="form-group mb-0 text-center">
                                 <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"> Sign Up </button>
                             </div>

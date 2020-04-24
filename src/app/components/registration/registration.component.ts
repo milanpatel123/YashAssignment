@@ -10,6 +10,10 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   users: any;
   errMsg: string;
+  fname = new FormControl('', [Validators.required]);
+  lname = new FormControl('', [Validators.required]);
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
   constructor(
     private fb: FormBuilder
@@ -17,16 +21,15 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      fname: new FormControl('', [Validators.required]),
-      lname: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      fname: this.fname,
+      lname: this.lname,
+      username: this.username,
+      password: this.password,
     });
     // this.users = JSON.parse(localStorage.getItem('users'));
   }
 
-  register(){
-    debugger;
+  register() {
     this.users = JSON.parse(localStorage.getItem('users'));
     console.log(this.registerForm.value);
     if (this.users) {
@@ -39,10 +42,10 @@ export class RegistrationComponent implements OnInit {
         // return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
     }
     }
-    
     if (this.registerForm.valid){
-      this.emptyArr.push(this.registerForm.value);
-      localStorage.setItem('users', JSON.stringify(this.emptyArr));
+      this.users === null ? this.registerForm.value.id = 1 : this.registerForm.value.id = this.users.length + 1;
+      this.users === null ? this.emptyArr.push(this.registerForm.value) : this.users.push(this.registerForm.value);
+      this.users === null ? localStorage.setItem('users', JSON.stringify(this.emptyArr)) : localStorage.setItem('users', JSON.stringify(this.users));
       this.registerForm.reset();
       this.errMsg = '';
     }

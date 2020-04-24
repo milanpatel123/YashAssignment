@@ -13,11 +13,15 @@
                             <!-- <h4 class="text-dark-50 text-center mt-0 font-weight-bold">Sign In</h4> -->
                             <p class="text-muted mb-4">Enter your username and password to access admin panel.</p>
                         </div>
+                        <div class="alert alert-danger" *ngIf="errMsg">{{errMsg}}</div>
 
                         <form [formGroup]="loginForm" (ngSubmit)="login()">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input class="form-control" type="text" id="username" placeholder="Enter Username" formControlName="username">
+                                <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                                    <span *ngIf="username.errors.required" class="text-danger"> Username is required.</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -26,6 +30,9 @@
                                 </a> -->
                                 <label for="password">Password</label>
                                 <input class="form-control" type="password" id="password" placeholder="Enter your password" formControlName="password">
+                                <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                                    <span *ngIf="password.errors.required" class="text-danger"> Password is required.</span>
+                                </div>
                             </div>
 
                             <!-- <div class="form-group mb-3">

@@ -16,7 +16,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   users: any;
-
+  errMsg: string;
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
   constructor(
     private fb: FormBuilder,
     private router: Router
@@ -24,15 +26,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      username: this.username,
+      password: this.password
     });
     this.users = JSON.parse(localStorage.getItem('users'));
     console.log(this.users);
   }
 
   login() {
-    debugger;
     console.log(this.loginForm.value);
     if (this.users) {
       let duplicateUser = this.users.filter((user) => {
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
       });
       if (duplicateUser.length === 0) {
         // this.errMsg = this.registerForm.value.username + ' is already taken';
+        this.errMsg ='Please registre your account';
         console.log('Please registre your account');
         return;
         // return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
@@ -51,9 +53,11 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(duplicateUser[0]));
         this.router.navigateByUrl('/dashboard');
       } else {
+        this.errMsg ='Username or password is incorrect';
         console.log('Username or password is incorrect');
       }
     } else {
+      this.errMsg = 'Please registre your account';
       console.log('Please registre your account');
     }
   }

@@ -1,5 +1,13 @@
 <div class="container">
-    <div class="row">
+
+    <div>
         <h1>Hi {{currentUser.fname}}!</h1>
+        <h3>All registered users:</h3>
+        <ul>
+            <li *ngFor="let user of users">
+                {{user.username}} ({{user.fname}} {{user.lname}}) - <a class="text-danger" (click)="deleteUser(user.id)">Delete</a>
+            </li>
+        </ul>
+        <p><a href="javascript:void(0)" (click)="logout()">Logout</a></p>
     </div>
 </div>
